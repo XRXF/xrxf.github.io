@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RXF Studio Pro</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='#1e1e1e'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='#007acc' font-family='monospace' font-weight='bold'>R</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/iconify-icon/3.0.2/iconify-icon.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="menu-bar">
+            <div class="logo">
+                <iconify-icon icon="mdi:flash" width="20" height="20" style="color: #007acc"></iconify-icon>
+                <span class="logo-text">RXF Studio Pro</span>
+            </div>
+            <div class="menu-items">
+                <div class="menu-dropdown">
+                    <span class="menu-label">File</span>
+                    <div class="dropdown-content">
+                        <button data-action="new"><iconify-icon icon="mdi:file-plus" width="16" height="16"></iconify-icon>New Project</button>
+                        <button data-action="open"><iconify-icon icon="mdi:folder-open" width="16" height="16"></iconify-icon>Open Project</button>
+                        <hr>
+                        <button data-action="save"><iconify-icon icon="mdi:content-save" width="16" height="16"></iconify-icon>Save</button>
+                        <button data-action="saveas"><iconify-icon icon="mdi:content-save-outline" width="16" height="16"></iconify-icon>Save As</button>
+                        <hr>
+                        <button data-action="export"><iconify-icon icon="mdi:export" width="16" height="16"></iconify-icon>Export RXF</button>
+                        <button data-action="exporthtml"><iconify-icon icon="mdi:language-html5" width="16" height="16"></iconify-icon>Export HTML</button>
+                        <hr>
+                        <button data-action="exit"><iconify-icon icon="mdi:exit-to-app" width="16" height="16"></iconify-icon>Exit</button>
+                    </div>
+                </div>
+                <div class="menu-dropdown">
+                    <span class="menu-label">Edit</span>
+                    <div class="dropdown-content">
+                        <button id="editUndo"><iconify-icon icon="mdi:undo" width="16" height="16"></iconify-icon>Undo</button>
+                        <button id="editRedo"><iconify-icon icon="mdi:redo" width="16" height="16"></iconify-icon>Redo</button>
+                        <hr>
+                        <button id="editCopy"><iconify-icon icon="mdi:content-copy" width="16" height="16"></iconify-icon>Copy</button>
+                        <button id="editPaste"><iconify-icon icon="mdi:content-paste" width="16" height="16"></iconify-icon>Paste</button>
+                        <button id="editDelete"><iconify-icon icon="mdi:delete" width="16" height="16"></iconify-icon>Delete</button>
+                    </div>
+                </div>
+                <div class="menu-dropdown">
+                    <span class="menu-label">View</span>
+                    <div class="dropdown-content">
+                        <button id="viewGrid"><iconify-icon icon="mdi:grid" width="16" height="16"></iconify-icon>Grid</button>
+                        <button id="viewSnap"><iconify-icon icon="mdi:snap" width="16" height="16"></iconify-icon>Snap to Grid</button>
+                        <button id="viewConsole"><iconify-icon icon="mdi:console" width="16" height="16"></iconify-icon>Console</button>
+                        <button id="viewProperties"><iconify-icon icon="mdi:properties" width="16" height="16"></iconify-icon>Properties</button>
+                    </div>
+                </div>
+                <div class="menu-dropdown">
+                    <span class="menu-label">Build</span>
+                    <div class="dropdown-content">
+                        <button data-action="run"><iconify-icon icon="mdi:play" width="16" height="16"></iconify-icon>Run</button>
+                        <button id="buildDebug"><iconify-icon icon="mdi:bug" width="16" height="16"></iconify-icon>Debug</button>
+                        <button id="buildProfile"><iconify-icon icon="mdi:chart-line" width="16" height="16"></iconify-icon>Profile</button>
+                    </div>
+                </div>
+                <div class="menu-dropdown">
+                    <span class="menu-label">Help</span>
+                    <div class="dropdown-content">
+                        <button id="helpDocs"><iconify-icon icon="mdi:book-open" width="16" height="16"></iconify-icon>Documentation</button>
+                        <button id="helpAbout"><iconify-icon icon="mdi:information" width="16" height="16"></iconify-icon>About</button>
+                    </div>
+                </div>
+            </div>
+            <div class="window-controls">
+                <span class="window-title" id="windowTitle">Untitled.rxf</span>
+            </div>
+        </div>
+        
+        <div class="toolbar">
+            <button id="toolNew" class="tool-btn" title="New"><iconify-icon icon="mdi:file-plus" width="18" height="18"></iconify-icon></button>
+            <button id="toolOpen" class="tool-btn" title="Open"><iconify-icon icon="mdi:folder-open" width="18" height="18"></iconify-icon></button>
+            <button id="toolSave" class="tool-btn" title="Save"><iconify-icon icon="mdi:content-save" width="18" height="18"></iconify-icon></button>
+            <div class="separator"></div>
+            <button id="toolUndo" class="tool-btn" title="Undo"><iconify-icon icon="mdi:undo" width="18" height="18"></iconify-icon></button>
+            <button id="toolRedo" class="tool-btn" title="Redo"><iconify-icon icon="mdi:redo" width="18" height="18"></iconify-icon></button>
+            <div class="separator"></div>
+            <button id="toolPlay" class="tool-btn" title="Play"><iconify-icon icon="mdi:play" width="18" height="18"></iconify-icon></button>
+            <button id="toolStop" class="tool-btn" title="Stop"><iconify-icon icon="mdi:stop" width="18" height="18"></iconify-icon></button>
+            <button id="toolDebug" class="tool-btn" title="Debug"><iconify-icon icon="mdi:bug" width="18" height="18"></iconify-icon></button>
+            <div class="separator"></div>
+            <button id="toolRun" class="tool-btn btn-primary" title="Run"><iconify-icon icon="mdi:rocket" width="18" height="18"></iconify-icon> Run</button>
+            <button id="toolExport" class="tool-btn" title="Export"><iconify-icon icon="mdi:export" width="18" height="18"></iconify-icon></button>
+        </div>
+        
+        <div class="main">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-tabs">
+                        <button class="sidebar-tab active" data-panel="explorer"><iconify-icon icon="mdi:folder" width="16" height="16"></iconify-icon> Explorer</button>
+                        <button class="sidebar-tab" data-panel="search"><iconify-icon icon="mdi:mag" width="16" height="16"></iconify-icon> Search</button>
+                        <button class="sidebar-tab" data-panel="git"><iconify-icon icon="mdi:git" width="16" height="16"></iconify-icon> Git</button>
+                    </div>
+                </div>
+                <div class="sidebar-content">
+                    <div id="explorerPanel" class="sidebar-panel active">
+                        <div class="explorer-section">
+                            <div class="explorer-title">PROJECT</div>
+                            <div id="projectTree" class="project-tree"></div>
+                        </div>
+                        <div class="explorer-section">
+                            <div class="explorer-title">OUTLINE</div>
+                            <div id="outlineTree" class="project-tree"></div>
+                        </div>
+                    </div>
+                    <div id="searchPanel" class="sidebar-panel">
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Search...">
+                            <select id="searchScope">
+                                <option value="all">All Files</option>
+                                <option value="scripts">Scripts</option>
+                                <option value="objects">Objects</option>
+                            </select>
+                            <button id="searchBtn"><iconify-icon icon="mdi:mag" width="16" height="16"></iconify-icon></button>
+                        </div>
+                        <div id="searchResults"></div>
+                    </div>
+                    <div id="gitPanel" class="sidebar-panel">
+                        <div class="git-status">
+                            <div class="git-branch"><iconify-icon icon="mdi:source-branch" width="14" height="14"></iconify-icon> main</div>
+                            <div class="git-changes">No changes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="center">
+                <div class="editor-tabs">
+                    <div id="editorTabs" class="tabs-list">
+                        <div class="tab active" data-tab="canvas"><iconify-icon icon="mdi:drawing" width="14" height="14"></iconify-icon> Canvas</div>
+                        <div class="tab" data-tab="code"><iconify-icon icon="mdi:code-tags" width="14" height="14"></iconify-icon> Code</div>
+                        <div class="tab" data-tab="preview"><iconify-icon icon="mdi:eye" width="14" height="14"></iconify-icon> Preview</div>
+                    </div>
+                    <button id="newTabBtn" class="new-tab"><iconify-icon icon="mdi:plus" width="14" height="14"></iconify-icon></button>
+                </div>
+                
+                <div id="canvasTab" class="editor-content active">
+                    <div class="canvas-container">
+                        <canvas id="canvas" width="800" height="600"></canvas>
+                        <div class="canvas-overlay" id="canvasOverlay">
+                            <div class="zoom-controls">
+                                <button id="zoomOut"><iconify-icon icon="mdi:minus" width="14" height="14"></iconify-icon></button>
+                                <span id="zoomLevel">100%</span>
+                                <button id="zoomIn"><iconify-icon icon="mdi:plus" width="14" height="14"></iconify-icon></button>
+                                <button id="zoomFit"><iconify-icon icon="mdi:fit-to-screen" width="14" height="14"></iconify-icon></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="canvas-tools">
+                        <div class="tool-group">
+                            <button class="tool-btn" data-tool="select" id="toolSelect"><iconify-icon icon="mdi:cursor-default" width="16" height="16"></iconify-icon> Select</button>
+                            <button class="tool-btn" data-tool="move" id="toolMove"><iconify-icon icon="mdi:arrow-all" width="16" height="16"></iconify-icon> Move</button>
+                            <button class="tool-btn" data-tool="rect" id="toolRect"><iconify-icon icon="mdi:square" width="16" height="16"></iconify-icon> Rect</button>
+                            <button class="tool-btn" data-tool="circle" id="toolCircle"><iconify-icon icon="mdi:circle" width="16" height="16"></iconify-icon> Circle</button>
+                            <button class="tool-btn" data-tool="text" id="toolText"><iconify-icon icon="mdi:format-text" width="16" height="16"></iconify-icon> Text</button>
+                        </div>
+                        <div class="tool-group">
+                            <button id="playBtn"><iconify-icon icon="mdi:play" width="16" height="16"></iconify-icon></button>
+                            <button id="stopBtn"><iconify-icon icon="mdi:stop" width="16" height="16"></iconify-icon></button>
+                            <button id="framePrev"><iconify-icon icon="mdi:chevron-left" width="16" height="16"></iconify-icon></button>
+                            <span id="frameCount">0/0</span>
+                            <button id="frameNext"><iconify-icon icon="mdi:chevron-right" width="16" height="16"></iconify-icon></button>
+                        </div>
+                        <div class="tool-group">
+                            <label><input type="checkbox" id="gridToggle"> <iconify-icon icon="mdi:grid" width="14" height="14"></iconify-icon> Grid</label>
+                            <label><input type="checkbox" id="snapToggle"> <iconify-icon icon="mdi:snap" width="14" height="14"></iconify-icon> Snap</label>
+                            <label>Size: <input type="number" id="gridSize" value="32" size="3"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="codeTab" class="editor-content">
+                    <div class="code-header">
+                        <div class="code-language">XFC</div>
+                        <div class="code-actions">
+                            <button id="codeFormat"><iconify-icon icon="mdi:format-paint" width="16" height="16"></iconify-icon> Format</button>
+                            <button id="codeRun"><iconify-icon icon="mdi:play" width="16" height="16"></iconify-icon> Run</button>
+                            <button id="codeSave"><iconify-icon icon="mdi:content-save" width="16" height="16"></iconify-icon> Save</button>
+                        </div>
+                    </div>
+                    <textarea id="codeEditor" class="code-editor" spellcheck="false"></textarea>
+                    <div class="code-status">
+                        <span id="cursorPos">Ln 1, Col 1</span>
+                        <span id="codeLength">0 chars</span>
+                    </div>
+                </div>
+                
+                <div id="previewTab" class="editor-content">
+                    <div class="preview-container">
+                        <iframe id="previewFrame" class="preview-frame"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="panel-section">
+                    <div class="panel-header">
+                        <span><iconify-icon icon="mdi:properties" width="14" height="14"></iconify-icon> Properties</span>
+                        <button id="closePropsBtn" class="panel-close"><iconify-icon icon="mdi:close" width="14" height="14"></iconify-icon></button>
+                    </div>
+                    <div id="propertiesContent" class="properties-content"></div>
+                </div>
+                
+                <div class="panel-section resizable">
+                    <div class="panel-header">
+                        <span><iconify-icon icon="mdi:console" width="14" height="14"></iconify-icon> Console</span>
+                        <div class="console-actions">
+                            <button id="clearConsoleBtn" class="icon-btn"><iconify-icon icon="mdi:delete-sweep" width="14" height="14"></iconify-icon></button>
+                            <button id="closeConsoleBtn" class="panel-close"><iconify-icon icon="mdi:close" width="14" height="14"></iconify-icon></button>
+                        </div>
+                    </div>
+                    <div id="console" class="console-content"></div>
+                    <div class="console-input-line">
+                        <span class="console-prompt"><iconify-icon icon="mdi:greater-than" width="12" height="12"></iconify-icon></span>
+                        <input type="text" id="consoleInput" class="console-input" placeholder="XFC command...">
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <div class="panel-header">
+                        <span><iconify-icon icon="mdi:image" width="14" height="14"></iconify-icon> Assets</span>
+                    </div>
+                    <div class="assets-content">
+                        <div class="asset-group">
+                            <div class="asset-title"><iconify-icon icon="mdi:image-multiple" width="12" height="12"></iconify-icon> Sprites</div>
+                            <div id="spriteList" class="asset-list"></div>
+                            <input type="file" id="spriteUpload" accept="image/*" multiple style="display:none">
+                            <button id="addSpriteBtn" class="asset-add"><iconify-icon icon="mdi:plus" width="14" height="14"></iconify-icon> Add Sprite</button>
+                        </div>
+                        <div class="asset-group">
+                            <div class="asset-title"><iconify-icon icon="mdi:music" width="12" height="12"></iconify-icon> Sounds</div>
+                            <div id="soundList" class="asset-list"></div>
+                            <input type="file" id="soundUpload" accept="audio/*" style="display:none">
+                            <button id="addSoundBtn" class="asset-add"><iconify-icon icon="mdi:plus" width="14" height="14"></iconify-icon> Add Sound</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            <div class="status-left">
+                <span id="statusText">Ready</span>
+                <span id="cursorStatus"></span>
+            </div>
+            <div class="status-right">
+                <span id="posText">0, 0</span>
+                <span id="fpsStatus"><iconify-icon icon="mdi:speedometer" width="12" height="12"></iconify-icon> FPS: 0</span>
+                <span id="memoryStatus"><iconify-icon icon="mdi:memory" width="12" height="12"></iconify-icon> Mem: 0 MB</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="player.js"></script>
+    <script src="console.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>
