@@ -23,5 +23,5 @@ No plugins. No legacy code. Just pure HTML5/Canvas.
 ### Embed player on your website
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/yourname/rxf/player.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xrxf/rxf/player.js"></script>
 <div data-rxf="animation.rxf" width="800" height="600"></div>
